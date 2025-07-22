@@ -59,4 +59,8 @@ $docker compose ps
 Swagger or OpenAPI documentation
 * http://localhost:8081/docs
 
-
+## 2. Consumer :: Consumer A
+```
+$cd consumer_a
+$npm install
+```
