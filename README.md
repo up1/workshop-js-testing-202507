@@ -40,7 +40,7 @@ $cd newman
 $newman run user_service.postman_collection.json
 ```
 
-## 1.3 API testing with [Supertest](https://www.npmjs.com/package/supertest) and [Jest](https://jestjs.io/)
+### 1.3 API testing with [Supertest](https://www.npmjs.com/package/supertest) and [Jest](https://jestjs.io/)
 * Internal testing or White box testing
 
 ```
@@ -49,7 +49,7 @@ $npm run test:api
 See coverage report in file
 * `coverage/lcov-report/index.html`
 
-## 1.4 Working with Docker
+### 1.4 Working with Docker
 ```
 $docker compose build user_service
 $docker compose up -d user_service
