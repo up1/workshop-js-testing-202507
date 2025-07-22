@@ -1,0 +1,8 @@
+services:
+  user_service:
+    image: user_service:1.0
+    build:
+      context: ./user_service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"

@@ -49,6 +49,14 @@ $npm run test:api
 See coverage report in file
 * `coverage/lcov-report/index.html`
 
+## 1.4 Working with Docker
+```
+$docker compose build user_service
+$docker compose up -d user_service
+$docker compose ps
+```
 
+Swagger or OpenAPI documentation
+* http://localhost:8081/docs
 
 
