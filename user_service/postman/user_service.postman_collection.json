@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "234d1b2f-a75d-4bab-bde8-77bd7d231d97",
+		"name": "user_service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1453931",
+		"_collection_link": "https://red-firefly-245852.postman.co/workspace/ais~7e6a987b-cef3-4218-bda3-e54197ccd2df/collection/1453931-234d1b2f-a75d-4bab-bde8-77bd7d231d97?action=share&source=collection_link&creator=1453931"
+	},
+	"item": [
+		{
+			"name": "Get all users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get all users :: Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"const schema = {",
+							"    type: \"array\",",
+							"    items: {",
+							"        type: \"object\",",
+							"        properties: {",
+							"            name: { type: \"string\" },",
+							"            email: { type: \"string\", format: \"email\" },",
+							"            age: { type: \"integer\" },",
+							"            id: { type: \"integer\" }",
+							"        },",
+							"        required: [\"name\", \"email\", \"age\", \"id\"]",
+							"    }",
+							"};",
+							"",
+							"pm.test(\"Get all users :: Validate JSON Schema\", function () {",
+							"    const Ajv = require('ajv');",
+							"    const ajv = new Ajv()",
+							"    const valid = ajv.validate(schema, response)",
+							"    console.log(ajv.errors)",
+							"    pm.expect(ajv.validate(schema, response)).to.be.true;",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "token"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "token"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"new user\",\n        \"email\": \"new_user@example.com\",\n        \"age\": 40\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/users"
+			},
+			"response": []
+		}
+	]
+}
