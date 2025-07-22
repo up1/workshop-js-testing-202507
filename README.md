@@ -60,6 +60,9 @@ Swagger or OpenAPI documentation
 * http://localhost:8081/docs
 
 ## 2. Consumer :: Consumer A
+* REST API
+* Call API from User service
+
 ```
 $cd consumer_a
 $npm install
