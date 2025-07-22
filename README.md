@@ -6,6 +6,8 @@
 * API Document with Swagger
 * API testing with Postman
 
+
+### 1.1 Start server
 ```
 $cd user_service
 $npm install
@@ -24,6 +26,10 @@ $npm start
 
 Swagger or OpenAPI documentation
 * http://localhost:8081/docs
+
+
+### 1.2 API testing with Postman
+* External testing or Blackbox testing
 
 Run API testing with Postman and [newman](https://www.npmjs.com/package/newman)
 * [newman-reporter-htmlextra](https://www.npmjs.com/package/newman-reporter-htmlextra)
