@@ -118,6 +118,7 @@ Access to api
     * Failure case
 * Create test case to generate contract file
   * `tests/contract_tests/user_service_specs.js`
+* Library :: [PactJS](https://github.com/pact-foundation/pact-js)
 
 ```
 $cd consumer_a
@@ -126,6 +127,10 @@ $npm run test:contract
 ```
 
 Pact's contract file created in folder `./pacts/`
+
+### 3.3 Publish pact's contract file to Pact Broker
+* Shared and monitor status of contracts
+* Centralized system
 
 
 
