@@ -167,5 +167,8 @@ Verify with Docker
 $docker compose -f docker-compose-pact.yml up pact_broker_verify
 ```
 
+## 4. Try to create more consumers to call User service
+* Let's go !!
+
 
 
