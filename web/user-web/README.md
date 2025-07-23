@@ -185,6 +185,16 @@ test("Success with create a new user", async ({ page }) => {
 });
 ```
 
+### Setup data for test in local storage
+```
+// Setup data in local storage
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("token", "token");
+  });
+});
+```
+
 ### Refactor to page object pattern
 * Separation of Concerns: Each page object handles its own page elements and actions
 * Reusability: Page objects can be reused across multiple tests
