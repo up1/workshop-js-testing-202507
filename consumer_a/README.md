@@ -51,6 +51,18 @@ $npm start
 
 ```
 $npm run test:component
+
+PASS  tests/component_tests/register_test.js
+  Register API Tests
+    POST /api/register - Component Tests with Supertest and Nock user service
+      ✓ should successfully register a user when user service returns 201 (87 ms)
+      ✓ should return 401 when authorization header is missing (6 ms)
+      ✓ should return 401 when authorization token is invalid (6 ms)
+      ✓ should return 500 when user service returns 400 error (44 ms)
+      ✓ should return 500 when user service is unreachable (15 ms)
+      ✓ should return 500 when user service returns 500 error (15 ms)
+      ✓ should handle user service timeout (1021 ms)
+      ✓ should send correct headers to user service (29 ms)
 ```
 
 ## 2. Unit testing
