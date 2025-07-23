@@ -403,6 +403,16 @@ Validate register success message
     Element Should Contain    xpath=//*[@data-testid="success-message"]    User created successfully
 ```
 
+Try to run
+```
+$robot create_user_success.robot
+```
+
+### List of your problems ?
+* XXX
+* YYY
+* ZZZ
+
 ## 3. Contract testing
 * Working with External REST API
   * Consumer = Web UI
