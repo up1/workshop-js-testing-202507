@@ -6,7 +6,7 @@ export interface User {
 }
 
 // Replace this with your actual API base URL
-const API_BASE_URL = 'http://localhost:8081'; // Change this to your backend URL
+const API_BASE_URL = import.meta.env.API_BASE_URL || 'http://localhost:8081'; // Change this to your backend URL
 
 export const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
   const response = await fetch(`${API_BASE_URL}/users`, {
