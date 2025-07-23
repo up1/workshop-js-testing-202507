@@ -351,7 +351,57 @@ test("Success with create a new user", async ({ page }) => {
 });
 ```
 
-## 2.3 UI Testing with Robotframework and SeleniumLibrary
+### 2.3 UI Testing with Robotframework and SeleniumLibrary
+* Install [Python 3](https://www.python.org/)
+
+Check your python
+```
+$python -V
+$pip -V
+```
+
+Install robotframework and seleniumlibrary
+```
+$pip install robotframework
+$pip install robotframework-seleniumlibrary
+
+$robot
+[ ERROR ] Expected at least 1 argument, got 0.
+
+Try --help for usage information.
+```
+
+### Create first test case
+```
+*** Settings ***
+Library           SeleniumLibrary
+Test Teardown    Close All Browsers
+
+*** Test Cases ***
+Create User Successfully
+    [Documentation]    This test case verifies that a user can be created successfully.
+    Open Browser    http://localhost:8080/    chrome
+    Click Element    xpath=//*[@data-testid="create-user-button"]
+    Input data in register form
+    Submit registration form
+    Validate register success message
+
+*** Keywords ***
+Input data in register form
+    [Documentation]    This keyword inputs data into the registration form.
+    Input Text    xpath=//*[@data-testid="name-input"]    testuser
+    Input Text    xpath=//*[@data-testid="email-input"]    testuser@example.com
+    Input Text    xpath=//*[@data-testid="age-input"]    30
+
+Submit registration form
+    [Documentation]    This keyword submits the registration form.
+    Click Element    xpath=//*[@data-testid="create-user-button"]
+
+Validate register success message
+    [Documentation]    This keyword validates that the success message is displayed.
+    Wait Until Element Is Visible    xpath=//*[@data-testid="success-message"]
+    Element Should Contain    xpath=//*[@data-testid="success-message"]    User created successfully
+```
 
 ## 3. Contract testing
 * Working with External REST API
