@@ -21,6 +21,22 @@
 * [WireMock](https://wiremock.org/)
 * [Test container](https://testcontainers.com/)
 
+### 1.2 Working with stubby4node
+```
+$cd mock-server
+$npm install -g stubby
+$stubby -d api.yml -w
+```
+
+Access to Mock API server
+* http://localhost:8882
+
+Start server wotk mock server
+```
+$export USER_API_HOST=http://localhost:8882
+$npm start
+```
+
 ### 1.2 Internal mock server
 * NodeJS
   * [Nock](https://www.npmjs.com/package/nock)
