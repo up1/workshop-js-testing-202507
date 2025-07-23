@@ -21,3 +21,27 @@ Build tp production
 ```
 $npm run build
 ```
+
+## 2. User Interface Testing
+* Test streategies for Web UI ?
+  * End-to-End testing
+  * Component testing
+  * Contract testing
+* How to manage dependencies ?
+  * External REST API
+  * Data in browser
+    * Cookies
+    * Local storage
+    * Session storage
+* Tools
+  * [Robotframework](https://robotframework.org/) and [SeleniumLibrary](https://github.com/robotframework/SeleniumLibrary/)
+  * [Playwright](https://playwright.dev/)
+* Techniques
+  * Web element or Locator strategies
+  * Page Object pattern  
+
+
+## 3. Contract testing
+* Working with External REST API
+  * Consumer = Web UI
+  * Provider = User Service
