@@ -32,10 +32,6 @@ async function register(userData, authorization) {
     };
     return result;
   } catch (error) {
-    // Handle specific error cases
-    if (error.response && error.response.status === 401) {
-      throw new Error("Unauthorized: Invalid authorization token");
-    }
     if (error.code === "ECONNABORTED") {
       throw new Error("Request timed out while trying to register user");
     }
