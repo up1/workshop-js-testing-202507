@@ -14,7 +14,7 @@ const Index = () => {
             User Management System
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A modern and intuitive platform to manage your users efficiently. 
+            A modern and intuitive platform to manage your users efficiently.
             Create new users and view your complete user directory with ease.
           </p>
         </div>
@@ -32,7 +32,8 @@ const Index = () => {
             </CardHeader>
             <CardContent className="text-center">
               <Link to="/create-user">
-                <Button className="bg-gradient-primary hover:opacity-90 transition-smooth w-full">
+                <Button data-testid="create-user-button"
+                  className="bg-gradient-primary hover:opacity-90 transition-smooth w-full">
                   Create User
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
@@ -52,7 +53,8 @@ const Index = () => {
             </CardHeader>
             <CardContent className="text-center">
               <Link to="/users">
-                <Button variant="outline" className="w-full transition-smooth hover:bg-accent">
+                <Button data-testid="view-users-button"
+                  variant="outline" className="w-full transition-smooth hover:bg-accent">
                   View Users
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>

@@ -89,6 +89,7 @@ const CreateUser = () => {
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
                 <Input
+                  data-testid="name-input"
                   id="name"
                   type="text"
                   placeholder="Enter full name"
@@ -101,6 +102,7 @@ const CreateUser = () => {
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                  data-testid="email-input"
                   id="email"
                   type="email"
                   placeholder="Enter email address"
@@ -113,6 +115,7 @@ const CreateUser = () => {
               <div className="space-y-2">
                 <Label htmlFor="age">Age</Label>
                 <Input
+                  data-testid="age-input"
                   id="age"
                   type="number"
                   placeholder="Enter age"
@@ -125,6 +128,7 @@ const CreateUser = () => {
 
               <div className="flex gap-4 pt-4">
                 <Button
+                  data-testid="cancel-button"
                   type="button"
                   variant="outline"
                   onClick={() => navigate('/')}
@@ -133,6 +137,7 @@ const CreateUser = () => {
                   Cancel
                 </Button>
                 <Button
+                  data-testid="create-user-button"
                   type="submit"
                   disabled={loading}
                   className="flex-1 bg-gradient-primary hover:opacity-90 transition-smooth"

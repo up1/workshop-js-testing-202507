@@ -52,12 +52,15 @@ Open URL in browser
     * Local storage
     * Session storage
     * Cookies
-* Tools
-  * [Robotframework](https://robotframework.org/) and [SeleniumLibrary](https://github.com/robotframework/SeleniumLibrary/)
-  * [Playwright](https://playwright.dev/)
 * Techniques
   * Web element or Locator strategies
   * Page Object pattern  
+* Tools
+  * [Robotframework](https://robotframework.org/) and [SeleniumLibrary](https://github.com/robotframework/SeleniumLibrary/)
+  * [Playwright](https://playwright.dev/)
+
+## 2.1 Locator strategies
+* [Playwright best pratices](https://playwright.dev/docs/best-practices)
 
 
 ## 3. Contract testing
