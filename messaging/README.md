@@ -27,8 +27,16 @@ Access to RabbitMQ Management UI
   * password=password
 
 ### 2. Start Producer
+```
+$cd producer
+$npm start
+```
 
 ### 3. Start Consumer
+```
+$cd consumer
+$npm start
+```
 
 ## Testing strategies ?
 * End-to-end testing

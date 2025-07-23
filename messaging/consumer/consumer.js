@@ -8,7 +8,7 @@ amqp.connect('amqp://user:password@localhost', function(error0, connection) {
     if (error1) {
       throw error1;
     }
-    var queue = 'task_queue';
+    var queue = 'user_queue';
 
     channel.assertQueue(queue, {
       durable: true
