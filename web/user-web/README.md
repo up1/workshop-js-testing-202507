@@ -128,6 +128,65 @@ Try to record test script
 $npx playwright codegen http://localhost:8080/
 ```
 
+### Try to Mock API in test case
+* https://playwright.dev/docs/mock
+
+```
+import { test, expect } from "@playwright/test";
+
+test("Success with create a new user", async ({ page }) => {
+  // Intercept network requests
+  await page.route("http://localhost:8081/users", (route) => {
+    if (route.request().method() === "POST") {
+      route.fulfill({
+        status: 201,
+        contentType: "application/json",
+        body: JSON.stringify({
+          id: "12345",
+          name: "demo",
+          email: "demo@gmail.com",
+          age: 30,
+        }),
+      });
+    } else {
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify([
+          {
+            id: "12345",
+            name: "demo",
+            email: "demo@gmail.com",
+            age: 30,
+          },
+        ]),
+      });
+    }
+  });
+
+  // Navigate to the application
+  await page.goto("http://localhost:8080/");
+  // Step 1: Click on the "Create User" button
+  await page.getByTestId("create-user-button").click();
+
+  // Step 2: Fill in the user details
+  await page.getByTestId("name-input").fill("demo");
+  await page.getByTestId("email-input").fill("demo@gmail.com");
+  await page.getByTestId("age-input").fill("30");
+  await page.getByTestId("create-user-button").click();
+
+  // Step 3: Verify with path
+  await expect(page).toHaveURL("http://localhost:8080/users");
+  // Step 4: Verify the user is listed size = 1 (//*[@data-testid="user-list"]/div)
+  await expect(page.getByTestId("user-list")).toBeVisible();
+  const userList = await page.getByTestId("user-list");
+  const userCount = await userList.locator("> div").count();
+  expect(userCount).toBe(1);
+});
+```
+
+### Refactor to page object pattern
+
 ## 2.3 UI Testing with Robotframework and SeleniumLibrary
 
 ## 3. Contract testing

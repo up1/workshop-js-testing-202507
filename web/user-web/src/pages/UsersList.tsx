@@ -1,11 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { useToast } from '@/hooks/use-toast';
-import { getUsers, User } from '@/lib/api';
-import { Loader2, Plus, Users, Mail, Calendar } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { getUsers, User } from "@/lib/api";
+import { Loader2, Plus, Users, Mail, Calendar } from "lucide-react";
 
 const UsersList = () => {
   const navigate = useNavigate();
@@ -56,7 +62,7 @@ const UsersList = () => {
             </p>
           </div>
           <Button
-            onClick={() => navigate('/create-user')}
+            onClick={() => navigate("/create-user")}
             className="bg-gradient-primary hover:opacity-90 transition-smooth"
           >
             <Plus className="h-4 w-4 mr-2" />
@@ -73,7 +79,7 @@ const UsersList = () => {
                 Get started by creating your first user
               </p>
               <Button
-                onClick={() => navigate('/create-user')}
+                onClick={() => navigate("/create-user")}
                 className="bg-gradient-primary hover:opacity-90 transition-smooth"
               >
                 <Plus className="h-4 w-4 mr-2" />
@@ -82,9 +88,15 @@ const UsersList = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div
+            data-testid="user-list"
+            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
             {users.map((user) => (
-              <Card key={user.id} className="shadow-elegant hover:shadow-lg transition-smooth">
+              <Card
+                key={user.id}
+                className="shadow-elegant hover:shadow-lg transition-smooth"
+              >
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg">{user.name}</CardTitle>
@@ -111,7 +123,7 @@ const UsersList = () => {
         <div className="mt-8 text-center">
           <Button
             variant="outline"
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             className="transition-smooth"
           >
             Back to Home
