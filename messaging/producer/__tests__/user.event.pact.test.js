@@ -18,7 +18,7 @@ describe("Producer Pact", () => {
     ],
     messageProviders: {
       "a user add event": providerWithMetadata(() => {
-        return userCreated(1, "demo", "demo@example.com", 30);
+        return userCreated(1, "demo2", "demo@example.com", 30);
       }, {
         "contentType": "application/json",
         "queue": "user_queue",
