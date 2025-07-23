@@ -1,4 +1,5 @@
-var amqp = require('amqplib/callback_api');
+const amqp = require('amqplib/callback_api');
+const handler = require('./user.handler');
 
 amqp.connect('amqp://user:password@localhost', function(error0, connection) {
   if (error0) {
@@ -15,10 +16,13 @@ amqp.connect('amqp://user:password@localhost', function(error0, connection) {
     });
     channel.prefetch(1);
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
-    channel.consume(queue, function(msg) {
+    channel.consume(queue, async function(msg) {
       var secs = msg.content.toString().split('.').length - 1;
-
+  
       console.log(" [x] Received %s", msg.content.toString());
+
+      await handler(JSON.parse(msg.content.toString()))
+
       setTimeout(function() {
         console.log(" [x] Done");
         channel.ack(msg);

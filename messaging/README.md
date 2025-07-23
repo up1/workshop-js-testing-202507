@@ -29,17 +29,35 @@ Access to RabbitMQ Management UI
 ### 2. Start Producer
 ```
 $cd producer
+$npm install
 $npm start
 ```
 
 ### 3. Start Consumer
 ```
 $cd consumer
+$npm install
 $npm start
 ```
 
-## Testing strategies ?
+## Testing strategies for consumer and producer ?
 * End-to-end testing
 * Contract testing
 
 ## Contract testing with Pact's messaging
+* https://docs.pact.io/implementation_guides/javascript/docs/messages
+
+
+### 1. Consumer to create contract file
+```
+$cd consumer
+$npm run test:contract
+```
+
+Generated contract file in folder `pacts/`
+
+### 2. Producer as provider to verify from contract
+```
+$cd producer
+$npm run test:contract
+```
