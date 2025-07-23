@@ -19,7 +19,7 @@
 * [Postman mock server](https://learning.postman.com/docs/design-apis/mock-apis/set-up-mock-servers/)
 * [Stubby](https://www.npmjs.com/package/stubby)
 * [WireMock](https://wiremock.org/)
-* [Test container](https://testcontainers.com/)
+* Container-based => Docker
 
 ### 1.2 Working with stubby4node
 ```
@@ -37,13 +37,21 @@ $export USER_API_HOST=http://localhost:8882
 $npm start
 ```
 
-### 1.2 Internal mock server
+### 1.3 Internal mock server
 * NodeJS
   * [Nock](https://www.npmjs.com/package/nock)
 * Go
   * [Gock](https://github.com/h2non/gock)
 * Java
   * [WireMock Spring Boot Integration](https://wiremock.org/docs/spring-boot/)
+* [Test container](https://testcontainers.com/)
+
+### 1.4 Working with Nock
+* In folder `./tests/component-tests`
+
+```
+$npm run test:component
+```
 
 ## 2. Unit testing
 * All class/function/line must to be tested ?

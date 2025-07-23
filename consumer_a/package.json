@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test:contract": "mocha tests/contract_tests"
+    "test:contract": "mocha tests/contract_tests",
+    "test:component": "jest tests/component_tests --coverage"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,9 @@
     "@pact-foundation/pact": "^15.0.1",
     "chai": "^5.2.1",
     "chai-as-promised": "^8.0.1",
-    "mocha": "^11.7.1"
+    "jest": "^30.0.5",
+    "mocha": "^11.7.1",
+    "nock": "^14.0.6",
+    "supertest": "^7.1.4"
   }
 }

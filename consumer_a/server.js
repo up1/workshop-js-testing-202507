@@ -19,6 +19,7 @@ async function register(userData, authorization) {
   try {
     const response = await axios.post(`${getApiEndpoint()}/users`, userData, {
       headers: requestAuthHeader,
+      timeout: 1000, // Set timeout to 1000 milliseconds (1 second)
     });
 
     // Return the formatted result
@@ -31,9 +32,22 @@ async function register(userData, authorization) {
     };
     return result;
   } catch (error) {
-    throw new Error(
-      `Failed to register a new user. Status: ${error.response.status} and message: ${error.response.statusText}`
-    );
+    // Handle specific error cases
+    if (error.response && error.response.status === 401) {
+      throw new Error("Unauthorized: Invalid authorization token");
+    }
+    if (error.code === "ECONNABORTED") {
+      throw new Error("Request timed out while trying to register user");
+    }
+    // For other errors, throw a generic error
+    // This will be caught by the server's error handler
+    if (error.response) {
+      throw new Error(
+        `Failed to register a new user. Status: ${error.response.status} and message: ${error.response.statusText}`
+      );
+    } else {
+      throw new Error("Failed to register a new user due to an unknown error");
+    }
   }
 }
 
@@ -52,7 +66,6 @@ server.post("/api/register", async (req, res) => {
     const result = await register(req.body, headers.authorization);
     res.status(201).json(result);
   } catch (error) {
-    console.error("Error registering user:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
