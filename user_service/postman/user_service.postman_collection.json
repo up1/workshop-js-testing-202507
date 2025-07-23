@@ -26,10 +26,9 @@
 							"        properties: {",
 							"            name: { type: \"string\" },",
 							"            email: { type: \"string\", format: \"email\" },",
-							"            age: { type: \"integer\" },",
-							"            id: { type: \"integer\" }",
+							"            age: { type: \"integer\" }",
 							"        },",
-							"        required: [\"name\", \"email\", \"age\", \"id\"]",
+							"        required: [\"name\", \"email\", \"age\"]",
 							"    }",
 							"};",
 							"",
@@ -63,6 +62,36 @@
 		},
 		{
 			"name": "Create a user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create a user :: Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"const schema = {",
+							"    type: \"object\",",
+							"    properties: {",
+							"        name: { type: \"string\" },",
+							"        email: { type: \"string\", format: \"email\" },",
+							"        age: { type: \"integer\" }",
+							"    },",
+							"    required: [\"name\", \"email\", \"age\"]",
+							"};",
+							"",
+							"pm.test(\"Validate response schema\", function () {",
+							"    pm.expect(tv4.validate(response, schema)).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "bearer",
