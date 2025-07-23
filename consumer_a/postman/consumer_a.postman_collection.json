@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "3b272bb1-6bc2-40d7-b208-7872ef938bff",
+		"name": "consumer_a",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1453931",
+		"_collection_link": "https://red-firefly-245852.postman.co/workspace/ais~7e6a987b-cef3-4218-bda3-e54197ccd2df/collection/1453931-3b272bb1-6bc2-40d7-b208-7872ef938bff?action=share&source=collection_link&creator=1453931"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Register :: Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"const jsonSchema = {",
+							"    type: \"object\",",
+							"    properties: {",
+							"        header: {",
+							"            type: \"object\",",
+							"            properties: {",
+							"                status: { type: \"string\" },",
+							"                message: { type: \"string\" }",
+							"            },",
+							"            required: [\"status\", \"message\"]",
+							"        },",
+							"        data: {",
+							"            type: \"object\",",
+							"            properties: {",
+							"                name: { type: \"string\" },",
+							"                email: { type: \"string\", format: \"email\" },",
+							"                age: { type: \"integer\" }",
+							"            },",
+							"            required: [\"name\", \"email\", \"age\"]",
+							"        }",
+							"    },",
+							"    required: [\"header\", \"data\"]",
+							"};",
+							"",
+							"pm.test(\"Register :: Validate JSON Schema\", function() {",
+							"    pm.expect(tv4.validate(response, jsonSchema)).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "token"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"new user\",\n        \"email\": \"new_user@example.com\",\n        \"age\": 40\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8082/api/register"
+			},
+			"response": []
+		}
+	]
+}
