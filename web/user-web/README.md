@@ -186,6 +186,170 @@ test("Success with create a new user", async ({ page }) => {
 ```
 
 ### Refactor to page object pattern
+* Separation of Concerns: Each page object handles its own page elements and actions
+* Reusability: Page objects can be reused across multiple tests
+* Maintainability: If UI elements change, you only need to update the page object
+* Readability: The test is now more readable and follows a clear flow
+* Encapsulation: Page-specific logic is encapsulated within each page object
+
+### Create 3 pages
+1. HomePage.js
+2. CreateUserPage.ts
+3. UserListPage.ts
+
+HomePage.js
+```
+import { Page, Locator } from "@playwright/test";
+
+export class HomePage {
+  readonly page: Page;
+  readonly createUserButton: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.createUserButton = page.getByTestId("create-user-button");
+  }
+
+  async goto() {
+    await this.page.goto("http://localhost:8080/");
+  }
+
+  async clickCreateUserButton() {
+    await this.createUserButton.click();
+  }
+}
+```
+
+CreateUserPage.ts
+```
+import { Page, Locator } from "@playwright/test";
+
+export class CreateUserPage {
+  readonly page: Page;
+  readonly nameInput: Locator;
+  readonly emailInput: Locator;
+  readonly ageInput: Locator;
+  readonly createUserButton: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.nameInput = page.getByTestId("name-input");
+    this.emailInput = page.getByTestId("email-input");
+    this.ageInput = page.getByTestId("age-input");
+    this.createUserButton = page.getByTestId("create-user-button");
+  }
+
+  async fillUserDetails(name: string, email: string, age: string) {
+    await this.nameInput.fill(name);
+    await this.emailInput.fill(email);
+    await this.ageInput.fill(age);
+  }
+
+  async clickCreateUserButton() {
+    await this.createUserButton.click();
+  }
+
+  async createUser(name: string, email: string, age: string) {
+    await this.fillUserDetails(name, email, age);
+    await this.clickCreateUserButton();
+  }
+}
+```
+
+UserListPage.ts
+```
+import { Page, Locator, expect } from "@playwright/test";
+
+export class UserListPage {
+  readonly page: Page;
+  readonly userList: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.userList = page.getByTestId("user-list");
+  }
+
+  async verifyUrl() {
+    await expect(this.page).toHaveURL("http://localhost:8080/users");
+  }
+
+  async verifyUserListVisible() {
+    await expect(this.userList).toBeVisible();
+  }
+
+  async getUserCount(): Promise<number> {
+    return await this.userList.locator("> div").count();
+  }
+
+  async verifyUserCount(expectedCount: number) {
+    const userCount = await this.getUserCount();
+    expect(userCount).toBe(expectedCount);
+  }
+}
+```
+
+index.ts
+```
+export { HomePage } from "./HomePage";
+export { CreateUserPage } from "./CreateUserPage";
+export { UserListPage } from "./UserListPage";
+```
+
+Update file test case
+```
+import { test, expect } from "@playwright/test";
+import { HomePage, CreateUserPage, UserListPage } from "../pages";
+
+test("Success with create a new user", async ({ page }) => {
+  // Initialize page objects
+  const homePage = new HomePage(page);
+  const createUserPage = new CreateUserPage(page);
+  const userListPage = new UserListPage(page);
+
+  // Intercept network requests
+  await page.route("http://localhost:8081/users", (route) => {
+    if (route.request().method() === "POST") {
+      route.fulfill({
+        status: 201,
+        contentType: "application/json",
+        body: JSON.stringify({
+          id: "12345",
+          name: "demo",
+          email: "demo@gmail.com",
+          age: 30,
+        }),
+      });
+    } else {
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify([
+          {
+            id: "12345",
+            name: "demo",
+            email: "demo@gmail.com",
+            age: 30,
+          },
+        ]),
+      });
+    }
+  });
+
+  // Step 1: Navigate to the application and click create user button
+  await homePage.goto();
+  await homePage.clickCreateUserButton();
+
+  // Step 2: Fill in the user details and create user
+  await createUserPage.createUser("demo", "demo@gmail.com", "30");
+
+  // Step 3: Verify navigation to user list page
+  await userListPage.verifyUrl();
+  
+  // Step 4: Verify the user is listed
+  await userListPage.verifyUserListVisible();
+  await userListPage.verifyUserCount(1);
+});
+```
 
 ## 2.3 UI Testing with Robotframework and SeleniumLibrary
 
