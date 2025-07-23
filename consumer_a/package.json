@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:contract": "mocha tests/contract_tests"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +14,11 @@
   "dependencies": {
     "axios": "^1.10.0",
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@pact-foundation/pact": "^15.0.1",
+    "chai": "^5.2.1",
+    "chai-as-promised": "^8.0.1",
+    "mocha": "^11.7.1"
   }
 }
