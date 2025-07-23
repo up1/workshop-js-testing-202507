@@ -391,6 +391,8 @@ Test Teardown    Close All Browsers
 Create User Successfully
     [Documentation]    This test case verifies that a user can be created successfully.
     Open Browser    http://localhost:8080/    chrome
+    # Set data in local storage
+    Execute JavaScript    localStorage.setItem("token", "token");
     Click Element    xpath=//*[@data-testid="create-user-button"]
     Input data in register form
     Submit registration form
@@ -409,8 +411,11 @@ Submit registration form
 
 Validate register success message
     [Documentation]    This keyword validates that the success message is displayed.
-    Wait Until Element Is Visible    xpath=//*[@data-testid="success-message"]
-    Element Should Contain    xpath=//*[@data-testid="success-message"]    User created successfully
+    Wait Until Element Is Visible    xpath=//*[@data-testid="user-list"]
+    Location Should Be    http://localhost:8080/users
+    # Check div count
+    ${div_count}=    Get Element Count    xpath=//*[@data-testid="user-list"]/div
+    Should Be Equal As Integers    ${div_count}    3
 ```
 
 Try to run
