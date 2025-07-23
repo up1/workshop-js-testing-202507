@@ -132,7 +132,40 @@ Pact's contract file created in folder `./pacts/`
 * Shared and monitor status of contracts
 * Centralized system
 
+Install Pact Broker with Docker 
+```
+$docker compose -f docker-compose-pact.yml up -d postgres
+$docker compose -f docker-compose-pact.yml up -d pact_broker
+$docker compose -f docker-compose-pact.yml ps
+```
 
+Go to Pact Broker UI
+* http://localhost:9292
+  * user=pact_workshop
+  * password=pact_workshop
+
+Publish with [Pact CLI](https://github.com/pact-foundation/pact-ruby-standalone/releases)
+```
+$pact-broker publish ./pacts --consumer-app-version=1.0.0 --branch=main --broker-base-url=http://pact-broker-server:9292 --broker-username pact_workshop --broker-password pact_workshop -v
+```
+
+Publish with Docker
+```
+$docker compose -f docker-compose-pact.yml up pact_broker_publish
+```
+
+### 3.4 When provider or User Service change !!
+* Must be check or verify all contracts by yourself
+
+Verify with [Pact CLI](https://github.com/pact-foundation/pact-ruby-standalone/releases)
+```
+$pact-provider-verifier --provider "User Service" --provider-base-url http://provider-server:8081 --pact-broker-base-url=http://pact-broker-server:9292 --broker-username pact_workshop --broker-password pact_workshop --wait 10 --publish-verification-results true --provider-app-version 1.0.0 --branch=main --wait 10
+```
+
+Verify with Docker
+```
+$docker compose -f docker-compose-pact.yml up pact_broker_verify
+```
 
 
 

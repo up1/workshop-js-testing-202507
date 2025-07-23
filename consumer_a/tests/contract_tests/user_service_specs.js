@@ -14,7 +14,7 @@ describe("Pact", () => {
     log: path.resolve(process.cwd(), "logs", "mockserver-integration.log"),
     dir: path.resolve(process.cwd(), "pacts"),
     logLevel: LOG_LEVEL,
-    spec: 4,
+    spec: 3,
   });
 
   // Alias flexible matchers for simplicity
@@ -147,8 +147,10 @@ describe("Pact", () => {
           },
           willRespondWith: {
             status: 401,
-            "Content-Type": "text/plain; charset=utf-8",
-            body: like("Unauthorized"),
+            headers: {
+              "Content-Type": "text/plain; charset=utf-8",
+            },
+            body: "Unauthorized",
           },
         })
       );
