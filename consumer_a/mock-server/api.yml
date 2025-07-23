@@ -1,0 +1,40 @@
+-  request:
+      url: /users
+      method: POST
+      headers:
+        content-type: application/json
+        authorization: Bearer token
+      post: >
+         {
+             "age": 30,
+             "email": "demo.user@example.com",
+             "name": "demo user"
+         }
+   response:
+    - status: 201
+      headers:
+         content-type: application/json; charset=utf-8
+      body: >
+         {
+             "age": 30,
+             "email": "demo.user@example.com",
+             "name": "demo user"
+         }
+
+-  request:
+      url: /users
+      method: POST
+      headers:
+        content-type: application/json
+        authorization: Bearer wrong-token
+      post: >
+         {
+             "age": 30,
+             "email": "demo.user@example.com",
+             "name": "demo user"
+         }
+   response:
+    - status: 401
+      headers:
+         content-type: text/plain; charset=utf-8
+      body: "Unauthorized"
