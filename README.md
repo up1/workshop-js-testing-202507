@@ -78,6 +78,14 @@ $npm start
 Access to api
 * http://localhost:8082
 
+Working with docker
+```
+$docker compose build consumer_a
+$docker compose up -d consumer_a
+$docker compose ps
+```
+
+
 
 ### 2.2 API testing with Postman
 * External testing or Blackbox testing

@@ -6,3 +6,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8081:8081"
+  
+  consumer_a:
+    image: consumer_a:1.0
+    build:
+      context: ./consumer_a
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - USER_API_HOST=http://user_service:8081
