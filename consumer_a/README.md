@@ -11,14 +11,23 @@
   * Jest and [Jest Mock](https://jestjs.io/docs/mock-functions)
 
 ## 1. Component testing
-* How to mock `User service` ?
+* How to mock `User service` REST API ?
   * Create Mock server ?
   * Change URL of user service from real url to mock url ?
 
 ### 1.1 External mock server
-
+* [Postman mock server](https://learning.postman.com/docs/design-apis/mock-apis/set-up-mock-servers/)
+* [Stubby](https://www.npmjs.com/package/stubby)
+* [WireMock](https://wiremock.org/)
+* [Test container](https://testcontainers.com/)
 
 ### 1.2 Internal mock server
+* NodeJS
+  * [Nock](https://www.npmjs.com/package/nock)
+* Go
+  * [Gock](https://github.com/h2non/gock)
+* Java
+  * [WireMock Spring Boot Integration](https://wiremock.org/docs/spring-boot/)
 
 ## 2. Unit testing
 * All class/function/line must to be tested ?
