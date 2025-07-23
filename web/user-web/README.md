@@ -7,6 +7,8 @@
     * Tailwind CSS
 
 ## 1. Install and start project
+
+### 1.1 Build and Run
 ```
 $npm install
 
@@ -16,11 +18,28 @@ $npm run dev
 
 Open URL in browser
 * http://localhost:8080/
+  * Create data in local storage
+    * key=token
+    * value=token
 
-Build tp production
+Build to production
 ```
 $npm run build
 ```
+
+### 1.2 Build and run with Docker
+```
+$docker compose build web_ui
+$docker compose up -d web_ui
+$docker compose ps
+```
+
+Open URL in browser
+* http://localhost:9000/
+  * Create data in local storage
+    * key=token
+    * value=token
+
 
 ## 2. User Interface Testing
 * Test streategies for Web UI ?
@@ -29,10 +48,10 @@ $npm run build
   * Contract testing
 * How to manage dependencies ?
   * External REST API
-  * Data in browser
-    * Cookies
+  * Data in browser ?
     * Local storage
     * Session storage
+    * Cookies
 * Tools
   * [Robotframework](https://robotframework.org/) and [SeleniumLibrary](https://github.com/robotframework/SeleniumLibrary/)
   * [Playwright](https://playwright.dev/)

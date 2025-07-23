@@ -16,3 +16,13 @@ services:
       - "8082:8082"
     environment:
       - USER_API_HOST=http://user_service:8081
+
+  web_ui:
+    image: web_ui:1.0
+    build:
+      context: ./web/user-web
+      dockerfile: Dockerfile
+    ports:
+      - "9000:80"
+    environment:
+      - API_BASE_URL=http://localhost:8081
