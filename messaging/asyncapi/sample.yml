@@ -1,0 +1,60 @@
+asyncapi: 3.0.0
+info:
+  title: Working with RabbitMQ
+  version: 1.0.0
+  description: Working with RabbitMQ
+defaultContentType: application/json
+servers:
+  production:
+    host: localhost
+    protocol: amqp
+channels:
+  queue:
+    address: '{queue}'
+    parameters:
+      queue: {}
+    bindings:
+      amqp:
+        is: queue
+        queue:
+          exclusive: true
+  user_queue:
+    address: user_queue
+    messages:
+      userCreated:
+        correlationId:
+          location: $message.header#/correlation_id
+        payload:
+          type: object
+          properties:
+            id:
+              type: number
+              examples:
+                - 1
+            name:
+              type: string
+              examples:
+                - demo name
+            email:
+              type: string
+              examples:
+                - demo@gmail.com
+            age:
+              type: number
+              examples:
+                - 30
+    bindings:
+      amqp:
+        is: queue
+        queue:
+          durable: false
+operations:
+  userCreated:
+    action: send
+    channel:
+      $ref: '#/channels/user_queue'
+    bindings:
+      amqp:
+        ack: true
+    messages:
+      - $ref: '#/channels/user_queue/messages/userCreated'

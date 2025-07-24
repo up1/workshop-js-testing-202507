@@ -1,2 +1,5 @@
 node_modules/
 pacts/
+docs/
+coverage/
+*.log
