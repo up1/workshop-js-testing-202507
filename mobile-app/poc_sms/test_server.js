@@ -74,6 +74,25 @@ app.post("/api/otp", (req, res) => {
   }
 });
 
+// GET OTP code by ref
+app.get("/api/otp", (req, res) => {
+  const { ref } = req.query;    
+    if (!ref || typeof ref !== "string") {
+        return res.status(400).json({
+        error: "Invalid ref format",
+        message: "Ref must be a string",
+        });
+    }
+
+  // Simulate fetching OTP by ref
+  const otpData = {
+    ref: ref,
+    otp: "123456", // Simulated OTP
+  };
+
+  res.status(200).json(otpData);
+});
+
 // Health check endpoint
 app.get("/health", (req, res) => {
   res.status(200).json({
