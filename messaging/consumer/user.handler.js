@@ -11,12 +11,14 @@ const schema = zod.object({
 
 const handler = (message) => {
   console.log("[x] Processing user event:", message);
-  // Validate jsonschema if needed
+  // Validate jsonschema
   const result = schema.safeParse(message);
   if (!result.success) {
     return Promise.reject(new Error("Invalid user event"));
   }
 
+  // Insert user into repository
+  console.log("[x] Inserting user into repository:", message);
   return Promise.resolve(userRepository.insert(new User(message.id, message.name, message.email, message.age)));
 }
 

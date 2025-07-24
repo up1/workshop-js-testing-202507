@@ -53,10 +53,12 @@ $npm start
 $cd consumer
 $npm run test:contract
 ```
-
-Generated contract file in folder `pacts/`
+Results
+* Generated contract file in folder `pacts/` 
+* Publish contract to Pact broker
 
 ### 2. Producer as provider to verify from contract
+* Example to read/load contract file from Consumer side
 ```
 $cd producer
 $npm run test:contract
