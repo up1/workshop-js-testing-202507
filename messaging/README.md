@@ -4,6 +4,7 @@
 * Tools
   * RabbitMQ
   * Apache Kafka
+* Documentation with [AsyncAPI](https://www.asyncapi.com/)
 
 ## Structure
 1. Producer
