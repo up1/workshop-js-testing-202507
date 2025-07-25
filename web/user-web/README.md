@@ -1,4 +1,4 @@
-# Workshop with Web UI
+# Workshop with Web UI 2025/07
 * Code Generated from [Lovable](https://lovable.dev) 
     * Vite
     * TypeScript
