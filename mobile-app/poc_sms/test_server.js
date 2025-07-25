@@ -3,26 +3,12 @@
 
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const port = 3000;
 
 // Middleware to parse JSON
 app.use(express.json());
-
-// CORS middleware for development
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-
-  if (req.method === "OPTIONS") {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
+app.use(cors());
 
 // OTP endpoint
 app.post("/api/otp", (req, res) => {
@@ -76,6 +62,10 @@ app.post("/api/otp", (req, res) => {
 
 // GET OTP code by ref
 app.get("/api/otp", (req, res) => {
+  console.log("Received GET OTP request:", {
+    timestamp: new Date().toISOString(),
+    query: req.query,
+  });
   const { ref } = req.query;    
     if (!ref || typeof ref !== "string") {
         return res.status(400).json({
@@ -111,6 +101,8 @@ app.listen(port, () => {
   console.log(`curl -X POST http://localhost:${port}/api/otp \\`);
   console.log(`  -H "Content-Type: application/json" \\`);
   console.log(`  -d '{"otp": "123456"}'`);
+  console.log(`\nTo test with GET request:`);
+  console.log(`curl -X GET http://localhost:${port}/api/otp?ref=your_ref_value`);
 });
 
 // Handle server shutdown gracefully
